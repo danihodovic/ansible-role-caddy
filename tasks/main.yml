@@ -1,0 +1,35 @@
+---
+- assert:
+    that:
+      - caddyfile is defined
+
+- name: Create caddy dir
+  file:
+    state: directory
+    path: /opt/caddy/config
+
+- name: Copy caddyfile
+  register: caddyfile
+  copy:
+    content: '{{ caddyfile }}'
+    dest: /opt/caddy/config/Caddyfile
+
+- name: Copy Dockerfile
+  copy:
+    src: Dockerfile
+    dest: /opt/caddy/Dockerfile
+
+- name: Build Caddy
+  docker_image:
+    source: build
+    force: true
+    build:
+      path: /opt/caddy
+    name: caddy
+
+- set_fact:
+    caddy_docker_container: >
+      {{ caddy_docker_container_defaults | combine(caddy_docker_container)}}
+
+- name: Start container
+  docker_container: '{{ caddy_docker_container }}'

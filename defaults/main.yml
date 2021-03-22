@@ -1,0 +1,15 @@
+---
+caddy_dir: /opt/caddy/
+caddy_docker_container: {}
+caddy_docker_container_defaults:
+  comparisons:
+    '*': strict
+  image: caddy
+  name: caddy
+  restart: true
+  restart_policy: unless-stopped
+  network_mode: host
+  env: '{{ caddy_env | default(omit) }}'
+  volumes:
+    - '/opt/caddy/data:/data'
+    - '/opt/caddy/config:/etc/caddy'

@@ -1,0 +1,17 @@
+---
+- name: Deploy Caddy
+  hosts: caddy
+  vars:
+    ansible_become: true
+  tasks:
+    - name: Get public ip
+      ipify_facts:
+
+    - name: Deploy Caddy
+      include_role:
+        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+      vars:
+        caddyfile: |
+          localhost:80 {
+            respond "Hello, world!"
+          }
