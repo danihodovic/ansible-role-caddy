@@ -25,6 +25,7 @@
     force: true
     build:
       path: /opt/caddy
+      network: host
     name: caddy
 
 - set_fact:
