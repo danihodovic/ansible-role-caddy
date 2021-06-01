@@ -22,7 +22,7 @@
 - name: Build Caddy
   docker_image:
     source: build
-    force: true
+    force_source: true
     build:
       path: /opt/caddy
       network: host
