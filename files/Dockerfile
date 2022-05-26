@@ -1,9 +1,7 @@
-FROM caddy:2.3.0-builder-alpine AS builder
+FROM caddy:2.5.1-builder-alpine AS builder
 
 RUN xcaddy build \
-				--with github.com/caddy-dns/cloudflare@latest \
-				--with github.com/greenpau/caddy-auth-portal \
-				--with github.com/greenpau/caddy-auth-jwt
+				--with github.com/caddy-dns/cloudflare@latest
 
 FROM caddy:2.3.0-alpine
 
