@@ -2,6 +2,7 @@
 caddy_dir: /opt/caddy/
 caddy_docker_container: {}
 caddy_docker_container_defaults:
+  image: danihodovic/caddy:2.7.4
   comparisons:
     '*': strict
   image: caddy
